@@ -1,0 +1,9 @@
+
+.breadcrumb-item.active {
+  color: black;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">";
+  padding: 0 1rem;
+  color: #6c757d;
+}

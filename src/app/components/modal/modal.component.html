@@ -1,0 +1,32 @@
+<!-- Modal Overlay -->
+<div
+  *ngIf="showModal"
+  class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 "
+  (click)="closeModal()"
+>
+  <div
+    class="bg-white rounded-lg shadow-lg max-w-xs w-full overflow-hidden"
+    (click)="stopPropagation($event)"
+  >
+    <!-- <h3 class="text-lg font-semibold mb-4">{{ title }}</h3> -->
+    <div class="p-4 border-b border-neutral-200">
+      <p class="text-neutral-500">{{ message }}</p>
+    </div>
+
+
+    <div *ngIf="showActions" class="flex">
+      <div
+        class="w-full flex justify-center items-center border-r border-neutral-200 hover:bg-neutral-100"
+      >
+        <button class="text-neutral-400 p-4" (click)="closeModal()">
+          {{cancelText}}
+        </button>
+      </div>
+      <div class="w-full flex justify-center items-center hover:bg-red-100">
+        <button class="text-red-500 p-4" (click)="confirmAction()">
+          {{confirmText}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

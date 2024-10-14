@@ -1,0 +1,13 @@
+<div class="custom-toast {{ toastType }}">
+    <div class="toast-header">
+      <strong>{{ title }}</strong>
+      <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      {{ message }}
+      <button (click)="viewCart()">View Cart</button>
+    </div>
+  </div>
+  

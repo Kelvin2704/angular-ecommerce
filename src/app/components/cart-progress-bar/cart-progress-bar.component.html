@@ -1,0 +1,129 @@
+<div class="w-full max-w-screen-xl mx-auto py-5 space-y-2 border-b border-neutral-200">
+  <a class="text-neutral-400 text-sm" routerLink="/">Back to Home</a>
+  <div class="flex items-center justify-between">
+    <!-- Step 1: Cart -->
+    <div class="flex items-center">
+      <div
+        [ngClass]="
+          currentStep > 1
+            ? 'bg-blue-600 text-white'
+            : 'border border-blue-600 text-blue-600'
+        "
+        class="relative flex items-center justify-center w-10 h-10 rounded-full"
+      >
+        <ng-container *ngIf="currentStep > 1; else step1">
+          <svg
+            class="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+        </ng-container>
+        <ng-template #step1> 1 </ng-template>
+      </div>
+      <span
+        [ngClass]="
+          currentStep >= 1 ? 'font-semibold text-black' : 'text-gray-500'
+        "
+        class="ml-2"
+        >Cart</span
+      >
+    </div>
+
+    <div
+      class="flex-grow h-1"
+      [ngClass]="currentStep > 1 ? 'bg-blue-600' : 'bg-gray-300'"
+    ></div>
+
+    <!-- Step 2: Checkout -->
+    <div class="flex items-center">
+      <div
+        [ngClass]="
+          currentStep > 2
+            ? 'bg-blue-600 text-white'
+            : currentStep === 2
+            ? 'border border-blue-600 text-blue-600'
+            : 'border border-gray-300 text-gray-300'
+        "
+        class="relative flex items-center justify-center w-10 h-10 rounded-full"
+      >
+        <ng-container *ngIf="currentStep > 2; else step2">
+          <svg
+            class="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+        </ng-container>
+        <ng-template #step2> 2 </ng-template>
+      </div>
+      <span
+        [ngClass]="
+          currentStep >= 2 ? 'font-semibold text-black' : 'text-gray-500'
+        "
+        class="ml-2"
+        >Checkout</span
+      >
+    </div>
+
+    <div
+      class="flex-grow h-1"
+      [ngClass]="currentStep > 2 ? 'bg-blue-600' : 'bg-gray-300'"
+    ></div>
+
+    <!-- Step 3: Orders -->
+    <div class="flex items-center">
+      <div
+        [ngClass]="
+          currentStep > 3
+            ? 'bg-blue-600 text-white'
+            : currentStep === 3
+            ? 'border border-blue-600 text-blue-600'
+            : 'border border-gray-300 text-gray-300'
+        "
+        class="relative flex items-center justify-center w-10 h-10 rounded-full"
+      >
+        <ng-container *ngIf="currentStep > 3; else step3">
+          <svg
+            class="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+        </ng-container>
+        <ng-template #step3> 3 </ng-template>
+      </div>
+      <span
+        [ngClass]="
+          currentStep >= 3 ? 'font-semibold text-black' : 'text-gray-500'
+        "
+        class="ml-2"
+        >Orders</span
+      >
+    </div>
+  </div>
+</div>

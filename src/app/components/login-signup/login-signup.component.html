@@ -1,0 +1,172 @@
+<div class="flex h-screen">
+  <!-- Left column: Full image -->
+  <div class="hidden lg:block lg:w-1/2 bg-orange-500">
+    <!-- Replace with your actual image -->
+    <img
+      src="https://images.unsplash.com/photo-1642052289104-1d4f7dbc3121?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      alt="Login background"
+      class="object-cover w-full h-full"
+    />
+  </div>
+
+  <!-- Right column: Login/Signup form -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center bg-white p-8">
+    <div class="w-full max-w-md">
+      <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">
+        {{ isLogin ? "Login" : "Create your account" }}
+      </h2>
+      <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <div *ngIf="!isLogin">
+          <label for="name" class="block text-sm font-medium text-gray-700"
+            >Full Name</label
+          >
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="mt-1 p-3 block w-full rounded-md border-gray-300 border focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          />
+          <p
+            *ngIf="
+              authForm.get('name')?.invalid && authForm.get('name')?.touched
+            "
+            class="mt-1 text-sm text-red-600"
+          >
+            Full name is required
+          </p>
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700"
+            >Email</label
+          >
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="mt-1 p-3 block w-full rounded-md border-gray-300 border focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          />
+          <p
+            *ngIf="
+              authForm.get('email')?.invalid && authForm.get('email')?.touched
+            "
+            class="mt-1 text-sm text-red-600"
+          >
+            Valid email is required
+          </p>
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            formControlName="password"
+            class="mt-1 p-3 block w-full rounded-md border-gray-300 border focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          />
+          <p
+            *ngIf="
+              authForm.get('password')?.invalid &&
+              authForm.get('password')?.touched
+            "
+            class="mt-1 text-sm text-red-600"
+          >
+            Password must be at least 6 characters long
+          </p>
+        </div>
+        <div *ngIf="isLogin" class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input
+              type="checkbox"
+              id="remember-me"
+              class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 border rounded"
+            />
+            <label for="remember-me" class="ml-2 block text-sm text-gray-900"
+              >Remember me</label
+            >
+          </div>
+          <div class="text-sm">
+            <a
+              href="#"
+              class="font-medium text-orange-600 hover:text-orange-500"
+              >Forgot Password?</a
+            >
+          </div>
+        </div>
+        <button
+          type="submit"
+          [disabled]="authForm.invalid"
+          class="w-full py-2 px-4 border border-transparent rounded-md text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+        >
+          {{ isLogin ? "Sign in" : "Sign up" }}
+        </button>
+      </form>
+      <!-- social button -->
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-white text-gray-500">Or continue with</span>
+          </div>
+        </div>
+        <div class="mt-6 grid grid-cols-3 gap-3">
+          <div>
+            <a
+              href="#"
+              class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+            >
+              <img
+                class="h-5 w-5"
+                src="https://www.svgrepo.com/show/512120/google-176.svg"
+                alt="Google logo"
+              />
+            </a>
+          </div>
+          <div>
+            <a
+              href="#"
+              class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+            >
+              <img
+                class="h-5 w-5"
+                src="https://www.svgrepo.com/show/513001/shopify-2.svg"
+                alt="Shopify logo"
+              />
+            </a>
+          </div>
+          <div>
+            <a
+              href="#"
+              class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+            >
+              <img
+                class="h-5 w-5"
+                src="https://www.svgrepo.com/show/513097/apple.svg"
+                alt="Apple logo"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-col items-center justify-center">
+        <button
+          (click)="toggleMode()"
+          class="text-sm text-orange-600 hover:text-orange-500"
+        >
+          {{
+            isLogin
+              ? "Need an account? Sign up"
+              : "Already have an account? Sign in"
+          }}
+        </button>
+        <button class="text-sm text-gray-500" (click)="navigateToHome()">
+          Back to Home
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

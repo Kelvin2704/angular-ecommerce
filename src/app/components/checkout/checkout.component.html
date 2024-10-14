@@ -1,0 +1,243 @@
+<div class="max-w-screen-xl mx-auto w-full h-fit bg-white">
+  <app-cart-progress-bar></app-cart-progress-bar>
+<!-- Your Cart content here -->
+
+  <div class="flex flex-col lg:flex-row w-full h-full items-start lg:space-x-2">
+    <div
+      class="bg-white w-full h-full rounded-lg p-5 lg:pr-20 lg:pt-20 lg:pl-10 lg:pb-10 space-y-7"
+    >
+      <!-- Contact Information -->
+      <div class="space-y-7">
+        <h2 class="text-xl font-semibold">Contact Information</h2>
+        <div class="">
+          <label for="email" class="block font-medium text-gray-700"
+            >Email address</label
+          >
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="email"
+            class="mt-2 p-2 block w-full border-gray-300 border rounded-lg"
+          />
+        </div>
+      </div>
+
+      <!-- Payment Details -->
+      <div class="space-y-7">
+        <h2 class="text-xl font-semibold">Payment Details</h2>
+        <div class="flex space-x-7">
+          <label class="flex items-center space-x-5 cursor-pointer">
+            <input
+              type="radio"
+              name="paymentMethod"
+              [(ngModel)]="selectedPaymentMethod"
+              value="paypal"
+              class="form-radio text-red-600"
+            />
+            <span>PayPal</span>
+          </label>
+          <label class="flex items-center space-x-5 cursor-pointer">
+            <input
+              type="radio"
+              name="paymentMethod"
+              [(ngModel)]="selectedPaymentMethod"
+              value="creditCard"
+              class="form-radio text-red-600"
+            />
+            <span>Credit Card</span>
+          </label>
+        </div>
+
+        <!-- Credit Card Details (if selected) -->
+        <div *ngIf="selectedPaymentMethod === 'creditCard'" class="space-y-7">
+          <div>
+            <label for="cardNumber" class="block font-medium text-gray-700"
+              >Card Number</label
+            >
+            <input
+              type="text"
+              id="cardNumber"
+              [(ngModel)]="creditCard.cardNumber"
+              class="mt-2 p-2 block w-full border-gray-300 border rounded-lg"
+            />
+          </div>
+          <div>
+            <label for="nameOnCard" class="block font-medium text-gray-700"
+              >Name on Card</label
+            >
+            <input
+              type="text"
+              id="nameOnCard"
+              [(ngModel)]="creditCard.nameOnCard"
+              class="mt-2 p-2 block w-full border-gray-300 border rounded-lg"
+            />
+          </div>
+          <div class="flex space-x-4">
+            <div class="w-full">
+              <label
+                for="expirationDate"
+                class="block font-medium text-gray-700"
+                >Expiration Date</label
+              >
+              <input
+                type="text"
+                id="expirationDate"
+                [(ngModel)]="creditCard.expirationDate"
+                class="mt-2 p-2 block w-full border-gray-300 border rounded-lg"
+              />
+            </div>
+            <div class="w-1/3">
+              <label for="cvv" class="block font-medium text-gray-700"
+                >CVV</label
+              >
+              <input
+                type="text"
+                id="cvv"
+                [(ngModel)]="creditCard.cvv"
+                class="mt-2 p-2 block w-full border-gray-300 border rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipping Information -->
+      <div class="space-y-7">
+        <h2 class="text-xl font-semibold">Shipping address</h2>
+        <div class="">
+          <label for="company" class="block font-medium text-gray-700"
+            >Company</label
+          >
+          <input
+            type="text"
+            id="company"
+            [(ngModel)]="shippingAddress.company"
+            class="mt-2 p-2 block w-full border-gray-300 border rounded-lg"
+          />
+        </div>
+        <div class="">
+          <label for="address" class="block font-medium text-gray-700"
+            >Address</label
+          >
+          <input
+            type="text"
+            id="address"
+            [(ngModel)]="shippingAddress.address"
+            class="mt-2 p-2 block w-full border-gray-300 border rounded-lg"
+          />
+        </div>
+        <div class="flex space-x-4">
+          <div class="w-1/3">
+            <label for="city" class="block font-medium text-gray-700"
+              >City</label
+            >
+            <input
+              type="text"
+              id="city"
+              [(ngModel)]="shippingAddress.city"
+              class="mt-2 p-2 block w-full border-gray-300 border rounded-lg"
+            />
+          </div>
+          <div class="w-1/3">
+            <label for="state" class="block font-medium text-gray-700"
+              >State/Province</label
+            >
+            <input
+              type="text"
+              id="state"
+              [(ngModel)]="shippingAddress.state"
+              class="mt-2 p-2 block w-full border-gray-300 border rounded-lg"
+            />
+          </div>
+          <div class="w-1/3">
+            <label for="postalCode" class="block font-medium text-gray-700"
+              >Postal Code</label
+            >
+            <input
+              type="text"
+              id="postalCode"
+              [(ngModel)]="shippingAddress.postalCode"
+              class="mt-2 p-2 block w-full border-gray-300 border rounded-lg"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- orders -->
+    </div>
+    <div
+      class="w-full h-full bg-neutral-50 p-5 lg:pl-20 lg:pt-20 lg:pr-10 lg:pb-10"
+    >
+      <div class="w-full flex flex-col space-y-4">
+        <h2 class="text-xl font-semibold">Products</h2>
+        <div class="divide-y divide-neutral-200">
+          <!-- Loop through the selected products and display each one as a card -->
+
+          <div *ngFor="let product of selectedProducts" class="py-7">
+            <div class="flex items-start space-x-4 w-full justify-between">
+              <!-- Product Image -->
+              <div class="h-10 w-12 md:h-20 md:w-24">
+                <img
+                  [src]="product.image"
+                  alt="{{ product.title }}"
+                  class="h-full mx-auto object-cover rounded"
+                />
+              </div>
+
+              <!-- Product Details -->
+              <div class="flex-1">
+                <h2 class="text-base font-medium">{{ product.title }}</h2>
+                <p class="text-neutral-500">Quantity: {{ product.quantity }}</p>
+              </div>
+              <div class="">
+                <p class="text-neutral-900 text-lg font-medium">
+                  {{ product.price | currency }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-7 py-7">
+            <div class="flex justify-between text-neutral-700">
+              <p class="text-sm">Taxes (5%):</p>
+              <p class="text-neutral-900 text-sm font-medium">
+                {{ tax | currency }}
+              </p>
+            </div>
+            <div class="flex justify-between text-neutral-700">
+              <p class="text-sm">Delivery:</p>
+              <p class="text-neutral-900 text-sm font-medium">Free</p>
+            </div>
+            <div class="flex justify-between text-neutral-700">
+              <p class="text-sm">Promo Discount:</p>
+              <p class="text-neutral-900 text-sm font-medium">
+                - {{ promoDiscount | currency }}
+              </p>
+            </div>
+          </div>
+          <div class="flex justify-between py-7">
+            <p class="text-lg font-medium">Total Price:</p>
+            <p class="text-neutral-900 text-lg font-medium">
+              {{ total | currency }}
+            </p>
+          </div>
+          <button
+            class="w-full py-3 px-4 bg-black text-white text-lg font-semibold rounded-lg hover:bg-gray-800 transition duration-200"
+            (click)="confirmOrder()"
+          >
+            Confirm Order
+          </button>
+        </div>
+      </div>
+      <!-- Summary Section -->
+    </div>
+  </div>
+
+  <app-modal
+    [message]="'Are you sure you want to leave? Your progress will be lost.'"
+    [showModal]="showModal"
+    [cancelText]="'Cancel'"
+    [confirmText]="'Confirm'"
+    (onCancel)="cancelExit()"
+    (onConfirm)="confirmExit()"
+  ></app-modal>
+</div>

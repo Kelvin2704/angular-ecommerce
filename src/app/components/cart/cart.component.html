@@ -1,0 +1,269 @@
+<div class="max-w-screen-xl w-full h-full mx-auto bg-white">
+  
+  <app-cart-progress-bar></app-cart-progress-bar>
+  <!-- Your Cart content here -->
+
+  <div class="flex flex-col lg:flex-row w-full h-full items-start lg:space-x-2">
+    <!-- product list -->
+    <div
+      class="bg-white w-full h-full rounded-lg p-5 lg:pr-20 lg:pt-20 lg:pl-10 lg:pb-10 space-y-4"
+    >
+      <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-bold">Cart</h2>
+        <button
+          *ngIf="cartItems.length > 0"
+          class="bg-red-200 text-red-600 px-3 py-2 rounded font-medium"
+          (click)="clearCart()"
+        >
+          Clear all
+        </button>
+      </div>
+      <div class="relative h-full">
+        <div
+          *ngIf="cartItems.length === 0"
+          class="w-full h-full flex items-center justify-center"
+        >
+          <h2 class="text-2xl font-semibold w-fit h-fit">Your Cart is empty</h2>
+        </div>
+        <table
+          *ngIf="cartItems.length > 0"
+          class="pt-5 w-full text-left rtl:text-right"
+        >
+          <thead class="capitalize border-b border-gray-200">
+            <tr class="text-gray-500">
+              <th scope="col" class="p-2 lg:p-3">
+                <div class="flex items-center">
+                  <input
+                    id="checkbox-all-search"
+                    type="checkbox"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                    (change)="selectAll($event)"
+                  />
+                  <label for="checkbox-all-search" class="sr-only"
+                    >checkbox</label
+                  >
+                </div>
+              </th>
+              <th scope="col" class="p-2 lg:p-3 font-normal">Products</th>
+              <th
+                scope="col"
+                class="p-1 lg:p-3 font-normal hidden lg:table-cell"
+              >
+                Price
+              </th>
+              <th
+                scope="col"
+                class="p-1 lg:p-3 font-normal hidden lg:table-cell"
+              >
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y mb-96" *ngIf="cartItems.length > 0">
+            <tr
+              [ngClass]="{
+                'bg-neutral-100': selectedItems.has(item.id),
+                'hover:bg-neutral-50': !selectedItems.has(item.id)
+              }"
+              *ngFor="let item of cartItems"
+              class=""
+            >
+              <td class="p-2 lg:p-3">
+                <div class="flex items-center">
+                  <input
+                    id="checkbox-table-search-1"
+                    type="checkbox"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                    [checked]="selectedItems.has(item.id)"
+                    (change)="toggleSelection(item.id, $event)"
+                  />
+                  <label for="checkbox-table-search-1" class="sr-only"
+                    >checkbox</label
+                  >
+                </div>
+              </td>
+
+              <!-- product -->
+              <th
+                scope="row"
+                class="p-2 lg:p-3 flex items-center space-x-2 font-normal w-full"
+              >
+                <div class="h-10 w-12 md:h-20 md:w-24">
+                  <img class="h-full mx-auto" [src]="item.image" alt="" />
+                </div>
+                <div class="flex flex-col w-full space-y-2">
+                  <div class="w-fit">
+                    <p
+                      class="text-wrap text-sm lg:text-base w-52 line-clamp-2 md:line-clamp-2"
+                    >
+                      {{ item.title }}
+                    </p>
+                  </div>
+                  <!-- quanity & price -->
+                  <div class="flex items-center justify-between">
+                    <div class="lg:hidden">
+                      <p class="text-2xl font-semibold text-red-500">
+                        {{ item.price | currency }}
+                      </p>
+                    </div>
+                    <!-- buttons -->
+                    <div class="flex space-x-2">
+                      <div
+                        class="flex w-20 items-center justify-center rounded-md border border-gray-200"
+                      >
+                        <!-- Decrease Button -->
+                        <button
+                          (click)="decreaseQuantity(item.id)"
+                          class="flex justify-center items-center hover:bg-neutral-100 font-bold py-1 rounded-l-md focus:outline-none w-12"
+                        >
+                          -
+                        </button>
+
+                        <!-- Quantity Display -->
+                        <span class="font-semibold py-1 text-center w-12">
+                          {{ item.quantity }}
+                        </span>
+
+                        <!-- Increase Button -->
+                        <button
+                          (click)="increaseQuantity(item.id)"
+                          class="hover:bg-neutral-100 font-bold py-1 rounded-r-md focus:outline-none w-12"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <button
+                        class="lg:hidden"
+                        (click)="removeFromCart(item.id)"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="12"
+                          height="12"
+                          fill="#404040"
+                          viewBox="0 0 256 256"
+                        >
+                          <path
+                            d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </th>
+
+              <td class="hidden lg:table-cell lg:p-3">
+                <p class="text-lg">{{ item.price | currency }}</p>
+              </td>
+              <td class="hidden lg:table-cell lg:p-3">
+                <button (click)="removeFromCart(item.id)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    fill="#404040"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
+                    ></path>
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- cart summary -->
+    <div
+      class="w-full h-full bg-neutral-50 p-5 lg:pl-20 lg:pt-20 lg:pr-10 lg:pb-10 border-t border-neutral-200 md:border-none"
+    >
+      <h2 class="text-xl font-bold">Detail Summary</h2>
+
+      <!-- detail -->
+      <div class="divide-y divide-neutral-200 h-full">
+        <div class="flex flex-col lg:text-sm text-neutral-700 py-7 space-y-7">
+          <!-- subtotal -->
+          <div class="hidden md:flex items-start justify-between">
+            <p class="">Subtotal Product</p>
+            <span>{{ subtotal | currency }}</span>
+          </div>
+
+          <div class="flex items-start justify-between">
+            <p class="">Delivery</p>
+            <span>Free</span>
+          </div>
+
+          <!-- taxes(5%) -->
+          <div class="flex items-start justify-between">
+            <p class="">Taxes (5%)</p>
+            <span>{{ tax | currency }}</span>
+          </div>
+
+          <!-- promo -->
+          <div
+            class="flex items-start justify-between bg-neutral-50 font-semibold"
+          >
+            <p class="">Promo</p>
+            <span class="text-red-500"> {{ promoDiscount | currency }}</span>
+          </div>
+
+          <div class="flex items-center w-full h-full space-x-1">
+            <input
+              class="border-gray-200 border rounded-full w-full px-5 py-2 focus:outline-none focus:ring-gray-500 focus:ring-1"
+              type="text"
+              name="promo"
+              id=""
+              placeholder="Enter your promo code"
+              [(ngModel)]="promoCode"
+            />
+            <div class="w-fit h-full justify-center items-center">
+              <button (click)="applyPromoCode()">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#ef4444"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48-88a8,8,0,0,1-8,8H136v32a8,8,0,0,1-16,0V136H88a8,8,0,0,1,0-16h32V88a8,8,0,0,1,16,0v32h32A8,8,0,0,1,176,128Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- totalPrice -->
+        <div
+          class="flex flex-row w-full space-x-1 md:flex-col md:space-y-3 text-xl font-bold p-3"
+        >
+          <div class="flex items-center space-x-1 md:justify-between w-full">
+            <h6 class="">Total</h6>
+            <span class="text-2xl">{{ total | currency }}</span>
+          </div>
+          <!-- checkout btn -->
+          <div class="flex items-start space-x-5 w-full">
+            <div
+              class="flex w-full justify-center items-center rounded-xl px-5 py-2 bg-gray-900 text-white font-semibold"
+            >
+              <button (click)="proceedToCheckout()">Checkout Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal
+  [title]="modalTitle"
+  [message]="modalMessage"
+  [showModal]="showModal"
+  [showActions]="showActions"
+  (onCancel)="closeModal()"
+  (onConfirm)="confirmDelete()"
+></app-modal>
