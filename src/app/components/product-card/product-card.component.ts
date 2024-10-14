@@ -19,7 +19,6 @@ export class ProductCardComponent implements OnInit {
     setTimeout(() => {
       this.isLoading = false;
     }, 500);
-    console.log(this.product);
   }
   goToProductDetail(): void {
     this.route.navigate(['/product', this.product.id]);

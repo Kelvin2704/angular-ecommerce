@@ -4,6 +4,6 @@
 }
 .breadcrumb-item + .breadcrumb-item::before {
   content: ">";
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   color: #6c757d;
 }

@@ -1,21 +1,33 @@
 <div class="max-w-screen-xl w-full h-full mx-auto bg-white">
-  
   <app-cart-progress-bar></app-cart-progress-bar>
   <!-- Your Cart content here -->
 
-  <div class="flex flex-col lg:flex-row w-full h-full items-start lg:space-x-2">
+  <div
+    class="flex flex-col lg:flex-row w-full h-full items-start lg:space-x-2 border border-neutral-200 rounded-xl overflow-hidden"
+  >
     <!-- product list -->
     <div
-      class="bg-white w-full h-full rounded-lg p-5 lg:pr-20 lg:pt-20 lg:pl-10 lg:pb-10 space-y-4"
+      class="bg-white w-full h-full rounded-lg p-3 lg:p-5 lg:pr-20 lg:pt-20 lg:pl-10 lg:pb-10 space-y-4"
     >
       <div class="flex justify-between items-center">
         <h2 class="text-2xl font-bold">Cart</h2>
         <button
           *ngIf="cartItems.length > 0"
-          class="bg-red-200 text-red-600 px-3 py-2 rounded font-medium"
+          class="hover:bg-red-200 px-3 py-2 rounded font-medium"
           (click)="clearCart()"
         >
-          Clear all
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            class="text-red-600"
+            fill
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"
+            ></path>
+          </svg>
         </button>
       </div>
       <div class="relative h-full">
@@ -179,13 +191,15 @@
 
     <!-- cart summary -->
     <div
-      class="w-full h-full bg-neutral-50 p-5 lg:pl-20 lg:pt-20 lg:pr-10 lg:pb-10 border-t border-neutral-200 md:border-none"
+      class="w-full h-full bg-neutral-50 p-3 lg:p-5 lg:pl-20 lg:pt-20 lg:pr-10 lg:pb-10 border-t border-neutral-200 md:border-none"
     >
       <h2 class="text-xl font-bold">Detail Summary</h2>
 
       <!-- detail -->
-      <div class="divide-y divide-neutral-200 h-full">
-        <div class="flex flex-col lg:text-sm text-neutral-700 py-7 space-y-7">
+      <div class="divide-y divide-neutral-200">
+        <div
+          class="flex flex-col lg:text-sm text-neutral-700 py-3 lg:py-7 space-y-3 lg:space-y-7"
+        >
           <!-- subtotal -->
           <div class="hidden md:flex items-start justify-between">
             <p class="">Subtotal Product</p>
@@ -239,7 +253,7 @@
         </div>
         <!-- totalPrice -->
         <div
-          class="flex flex-row w-full space-x-1 md:flex-col md:space-y-3 text-xl font-bold p-3"
+          class="flex flex-row w-full space-x-1 md:flex-col md:space-y-3 text-xl font-bold"
         >
           <div class="flex items-center space-x-1 md:justify-between w-full">
             <h6 class="">Total</h6>

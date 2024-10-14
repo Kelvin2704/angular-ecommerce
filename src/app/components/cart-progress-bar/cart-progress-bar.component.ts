@@ -19,7 +19,6 @@ export class CartProgressBarComponent {
         this.updateStepFromRoute(event.url);
       }
     });
-    console.log(this.currentStep)
   }
 
   updateStepFromRoute(url: string): void {

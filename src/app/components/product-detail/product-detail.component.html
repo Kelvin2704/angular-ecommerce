@@ -35,12 +35,12 @@
     >
     </app-breadcrumbs>
     <div
-      class="flex flex-col lg:flex-row space-y-6 md:space-x-6 p-3 md:p-5 bg-white rounded"
+      class="flex flex-col lg:flex-row space-y-6 md:space-x-6 bg-white rounded"
     >
       <!-- image -->
-      <div class="w-full flex flex-col">
+      <div class=" h-fit w-full flex flex-col">
         <!-- image -->
-        <div class="h-40 md:h-60 lg:h-1/2 w-full">
+        <div class="h-40 lg:h-80 w-full">
           <img
             [src]="product.image"
             alt="{{ product.title }}"
@@ -78,9 +78,8 @@
           </div>
         </div>
       </div>
-
       <!-- details -->
-      <div class="w-full h-full">
+      <div class="w-full h-fit">
         <div class="flex flex-col gap-5 lg:gap-6">
           <div class="space-y-5">
             <h1

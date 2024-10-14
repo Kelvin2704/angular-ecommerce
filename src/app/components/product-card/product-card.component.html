@@ -14,22 +14,22 @@
     </div>
   </div>
 
-  <ng-template #productContent class="w-full">
+  <ng-template #productContent>
     <div
       class="w-full h-full border bg-white border-gray-200 rounded-2xl overflow-hidden p-3 md:p-5 hover:border-red-500 cursor-pointer"
       (click)="goToProductDetail()"
     >
       <div class="flex flex-col gap-3">
-        <div class="flex justify-center w-full h-56">
+        <div class="flex justify-center w-full h-32 lg:h-56">
           <img
             class="h-full"
             [src]="product.image"
             alt="{{ product.title }}"
           />
         </div>
-        <div class="flex flex-col gap-2">
-          <div class="h-12 flex justify-between leading-tight text-gray-900 line-clamp-2">
-            <h6 class="text-base font-semibold w-2/3">
+        <div class="flex flex-col space-y-2 h-full">
+          <div class="flex flex-col space-y-2 h-full lg:flex-row lg:justify-between lg:space-y-0 items-start text-gray-900 ">
+            <h6 class="text-base font-semibold w-full h-full lg:w-2/3 line-clamp-1">
               {{ product.title }}
             </h6>
             <p class="text-lg font-semibold leading-tight text-neutral-900">
@@ -60,9 +60,6 @@
               </p>
             </div>
           </div>
-          <!-- <p class="text-gray-500 text-base line-clamp-3">
-            {{ product.description }}
-          </p> -->
         </div>
       </div>
     </div>

@@ -54,7 +54,6 @@ export class CartComponent implements OnInit {
 
     // Subscribe to store and sync cart state with component
     this.store.select('cart').subscribe((cartState) => {
-      console.log('cart state', cartState);
       this.cartItems = cartState.items;
       this.totalPrice = cartState.total;
       // this.selectedItems.clear();
@@ -144,7 +143,7 @@ export class CartComponent implements OnInit {
     } else {
       this.selectedItems.delete(productId);
     }
-    console.log('cart selected items', this.selectedItems);
+    // console.log('cart selected items', this.selectedItems);
     this.calculateSummary();
   }
 
